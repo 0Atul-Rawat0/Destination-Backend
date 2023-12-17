@@ -1,13 +1,13 @@
 package com.atul.exception;
 
-public class WanderLustException extends Exception{
+public class DestinationException extends Exception{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public WanderLustException(String message) {
+	public DestinationException(String message) {
 		super(message);
 	}
 

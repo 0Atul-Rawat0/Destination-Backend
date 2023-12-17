@@ -18,7 +18,7 @@ import com.atul.dto.ItineraryDTO;
 import com.atul.entity.Destination;
 import com.atul.entity.Details;
 import com.atul.entity.Itinerary;
-import com.atul.exception.WanderLustException;
+import com.atul.exception.DestinationException;
 import com.atul.repository.PackageRepository;
 import com.atul.service.PackageServiceImpl;
 
@@ -37,7 +37,7 @@ public class PackageServiceTest {
 	 void GetPackagesSearchInvalidTest() throws Exception{
 		List<Destination> dest=new ArrayList<>();
 		Mockito.when(packageRepo.findByContinent("continent")).thenReturn(dest);
-		WanderLustException excep= Assertions.assertThrows(WanderLustException.class,()->packageServiceImpl.getPackagesSearch("continent"));
+		DestinationException excep= Assertions.assertThrows(DestinationException.class,()->packageServiceImpl.getPackagesSearch("continent"));
 		Assertions.assertEquals("PackageService.PACKAGE_UNAVAILABLE",excep.getMessage());
 	
 	}
@@ -67,7 +67,7 @@ public class PackageServiceTest {
      void GetItineraryInvalidTest() throws Exception{
     	Destination dest= new Destination();
     	Mockito.when(packageRepo.findById(dest.getDestinationId())).thenReturn(null);
-		WanderLustException excep= Assertions.assertThrows(WanderLustException.class,()->packageServiceImpl.getItinerary("S52752"));
+		DestinationException excep= Assertions.assertThrows(DestinationException.class,()->packageServiceImpl.getItinerary("S52752"));
 		Assertions.assertEquals("PackageService.ITINERARY_UNAVAILABLE",excep.getMessage());
     }
     @Test
@@ -126,7 +126,7 @@ public class PackageServiceTest {
     	de.setDestinationId("D73470");
     	
     	Mockito.when(packageRepo.findAll()).thenReturn(List.of());
-		WanderLustException excep= Assertions.assertThrows(WanderLustException.class,()->packageServiceImpl.getPackages());
+		DestinationException excep= Assertions.assertThrows(DestinationException.class,()->packageServiceImpl.getPackages());
 		Assertions.assertEquals("PackageService.PACKAGE_UNAVAILABLE",excep.getMessage());
     
     }

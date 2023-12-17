@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.atul.dto.UserDTO;
-import com.atul.exception.WanderLustException;
+import com.atul.exception.DestinationException;
 import com.atul.service.UserService;
 
 
@@ -28,14 +28,14 @@ public class UserAPI {
 	private Environment environment;
 
 	@PostMapping(value = "/userLogin")
-	public ResponseEntity<UserDTO> authenticateUser( @RequestBody UserDTO user) throws WanderLustException {
+	public ResponseEntity<UserDTO> authenticateUser( @RequestBody UserDTO user) throws DestinationException {
 
 			UserDTO userFromDB = userService.authenticateUser(user.getContactNumber(), user.getPassword());
 			return new ResponseEntity<UserDTO>(userFromDB, HttpStatus.OK);
 	}
 
 	@PostMapping(value = "/userRegister")
-	public ResponseEntity<String> registerUser(@Valid @RequestBody UserDTO user) throws WanderLustException {		
+	public ResponseEntity<String> registerUser(@Valid @RequestBody UserDTO user) throws DestinationException {		
 		
 		userService.registerUser(user);
 		String mess=environment.getProperty("UserAPI.REGISTER_USER_SUCCESS2");

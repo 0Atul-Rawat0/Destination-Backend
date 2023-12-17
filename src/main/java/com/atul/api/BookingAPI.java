@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.atul.dto.BookingDTO;
-import com.atul.exception.WanderLustException;
+import com.atul.exception.DestinationException;
 import com.atul.service.BookingService;
 
 
@@ -30,7 +30,7 @@ public class BookingAPI {
 	
 	@PostMapping(value="/bookings/{userId}/{destinationId}")
 	public ResponseEntity<Integer> addBooking(@RequestBody BookingDTO booking ,
-			@PathVariable Integer userId, @PathVariable String destinationId) throws WanderLustException{
+			@PathVariable Integer userId, @PathVariable String destinationId) throws DestinationException{
 		Integer id=bookingService.addBooking(booking, userId, destinationId);
 		
 			
@@ -47,7 +47,7 @@ public class BookingAPI {
 	}
 	
 	@DeleteMapping(value="/bookings/{bookingId}")
-    public ResponseEntity<String> deleteBooking(@PathVariable Integer bookingId)throws WanderLustException
+    public ResponseEntity<String> deleteBooking(@PathVariable Integer bookingId)throws DestinationException
     {   
 		bookingService.deleteBooking(bookingId);
     

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.atul.dto.UserDTO;
 import com.atul.entity.User;
-import com.atul.exception.WanderLustException;
+import com.atul.exception.DestinationException;
 import com.atul.repository.UserRepository;
 import com.atul.utility.HashingUtility;
 
@@ -23,11 +23,11 @@ public class UserServiceImpl implements UserService {
 
 
 	@Override
-	public UserDTO authenticateUser(String contactNumber, String password) throws WanderLustException {
+	public UserDTO authenticateUser(String contactNumber, String password) throws DestinationException {
 
 		User optionalUser = userRepository.findByContactNumber(contactNumber);
 		if (optionalUser == null) {
-			throw new WanderLustException("UserService.INVALID_CREDENTIALS");
+			throw new DestinationException("UserService.INVALID_CREDENTIALS");
 		}
 
 		String passwordFromDB = optionalUser.getPassword();
@@ -43,21 +43,21 @@ public class UserServiceImpl implements UserService {
 					userObject.setUserName(optionalUser.getUserName());
 					return userObject;
 				} else
-					throw new WanderLustException("UserService.INVALID_CREDENTIALS");
+					throw new DestinationException("UserService.INVALID_CREDENTIALS");
 			} catch (NoSuchAlgorithmException e) {
-				throw new WanderLustException("UserService.HASH_FUNCTION_EXCEPTION");
+				throw new DestinationException("UserService.HASH_FUNCTION_EXCEPTION");
 			}
 
 		} else
-			throw new WanderLustException("UserService.INVALID_CREDENTIALS");
+			throw new DestinationException("UserService.INVALID_CREDENTIALS");
 
 	}
 
 	@Override
-	public Integer registerUser(UserDTO user) throws WanderLustException {
+	public Integer registerUser(UserDTO user) throws DestinationException {
 User usr=userRepository.findByContactNumber(user.getContactNumber());
 		if(usr!=null) {
-			throw new WanderLustException("UserService.CONTACT_NUMBER_ALREADY_EXISTS");
+			throw new DestinationException("UserService.CONTACT_NUMBER_ALREADY_EXISTS");
 		}
 		User user1=new User();
 		user1.setUserId(user.getUserId());
@@ -66,14 +66,14 @@ User usr=userRepository.findByContactNumber(user.getContactNumber());
 		user1.setContactNumber(user.getContactNumber());
 		user1.setPassword(user.getPassword());
 		if(user1.getPassword()==null) {
-			throw new WanderLustException("UserService.INVALID_CREDENTIALS");		
+			throw new DestinationException("UserService.INVALID_CREDENTIALS");		
 		}
 		else {
 		String passwrd="";
 		try {
 			passwrd=HashingUtility.getHashValue(user.getPassword());
 		}catch (NoSuchAlgorithmException e) {
-			throw new WanderLustException("UserService.HASH_FUNCTION_EXCEPTION");
+			throw new DestinationException("UserService.HASH_FUNCTION_EXCEPTION");
 		}
 		user1.setPassword(passwrd);
 		userRepository.save(user1);

@@ -13,7 +13,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import com.atul.exception.WanderLustException;
+import com.atul.exception.DestinationException;
 
 
 @RestControllerAdvice
@@ -30,8 +30,8 @@ public class ExceptionControllerAdvice {
 		return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
-	@ExceptionHandler(WanderLustException.class)
-	public ResponseEntity<ErrorInfo> wanderLustExceptionHandler(WanderLustException exception) {
+	@ExceptionHandler(DestinationException.class)
+	public ResponseEntity<ErrorInfo> wanderLustExceptionHandler(DestinationException exception) {
 		ErrorInfo error = new ErrorInfo();
 		error.setErrorMessage(environment.getProperty(exception.getMessage()));
 		error.setTimestamp(LocalDateTime.now());

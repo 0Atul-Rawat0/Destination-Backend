@@ -9,7 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.atul.dto.UserDTO;
 import com.atul.entity.User;
-import com.atul.exception.WanderLustException;
+import com.atul.exception.DestinationException;
 import com.atul.repository.UserRepository;
 import com.atul.service.UserService;
 import com.atul.service.UserServiceImpl;
@@ -34,7 +34,7 @@ public class UserServiceTest {
 		user.setPassword("xyz");
 
 		Mockito.when(userRepository.findByContactNumber(contactNo)).thenReturn(user);
-		WanderLustException exception = Assertions.assertThrows(WanderLustException.class,
+		DestinationException exception = Assertions.assertThrows(DestinationException.class,
 				() -> userServiceImpl.authenticateUser(contactNo, password));
 		Assertions.assertEquals("UserService.INVALID_CREDENTIALS", exception.getMessage());
 
@@ -64,7 +64,7 @@ public class UserServiceTest {
 	@Test
 	public void noUserFoundAuthenticateTest() throws Exception{
 		Mockito.when(userRepository.findByContactNumber("703208765")).thenReturn(null);
-		WanderLustException wle=Assertions.assertThrows(WanderLustException.class,()->userServiceImpl.authenticateUser("703208765","Qwert@123"));
+		DestinationException wle=Assertions.assertThrows(DestinationException.class,()->userServiceImpl.authenticateUser("703208765","Qwert@123"));
 		
 				Assertions.assertEquals("UserService.INVALID_CREDENTIALS",wle.getMessage());
 	}
@@ -83,7 +83,7 @@ public class UserServiceTest {
 		user.setUserName(userdto.getUserName());
 		user.setUserId(userdto.getUserId());
 		Mockito.when(userRepository.findByContactNumber(userdto.getContactNumber())).thenReturn(user);
-		WanderLustException excp= Assertions.assertThrows(WanderLustException.class,()->userServiceImpl.authenticateUser(userdto.getContactNumber(), null));
+		DestinationException excp= Assertions.assertThrows(DestinationException.class,()->userServiceImpl.authenticateUser(userdto.getContactNumber(), null));
 		Assertions.assertEquals("UserService.INVALID_CREDENTIALS", excp.getMessage());		
 	}
 	
@@ -128,7 +128,7 @@ public class UserServiceTest {
 		user.setUserName(userdto.getUserName());
 		
 		Mockito.when(userRepository.findByContactNumber(userdto.getContactNumber())).thenReturn(user);
-		WanderLustException excp=Assertions.assertThrows(WanderLustException.class,()->userServiceImpl.registerUser(userdto));
+		DestinationException excp=Assertions.assertThrows(DestinationException.class,()->userServiceImpl.registerUser(userdto));
 		Assertions.assertEquals("UserService.CONTACT_NUMBER_ALREADY_EXISTS",excp.getMessage());
 		
 	}

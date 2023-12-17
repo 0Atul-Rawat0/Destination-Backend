@@ -13,7 +13,7 @@ import com.atul.dto.DestinationDTO;
 import com.atul.dto.DetailsDTO;
 import com.atul.dto.ItineraryDTO;
 import com.atul.entity.Destination;
-import com.atul.exception.WanderLustException;
+import com.atul.exception.DestinationException;
 import com.atul.repository.PackageRepository;
 
 @Service(value="packageService")
@@ -25,10 +25,10 @@ public class PackageServiceImpl implements PackageService{
 	
 	
 	@Override
-	public List<DestinationDTO> getPackagesSearch(String continent) throws WanderLustException{
+	public List<DestinationDTO> getPackagesSearch(String continent) throws DestinationException{
 		List<Destination> optional=packageRepo.findByContinent(continent);
 		if(optional.isEmpty())
-			throw new WanderLustException("PackageService.PACKAGE_UNAVAILABLE");
+			throw new DestinationException("PackageService.PACKAGE_UNAVAILABLE");
 		List<DestinationDTO> list=new ArrayList<DestinationDTO>();
 		for(Destination d:optional) {
 			DestinationDTO d1=new DestinationDTO();
@@ -65,10 +65,10 @@ public class PackageServiceImpl implements PackageService{
 		
 	}
 	
-	public DestinationDTO getItinerary(String destinationId) throws WanderLustException{
+	public DestinationDTO getItinerary(String destinationId) throws DestinationException{
 		
 		Optional<Destination> optional=packageRepo.findById(destinationId);
-		Destination d=optional.orElseThrow(()->new WanderLustException("PackageService.ITINERARY_UNAVAILABLE"));
+		Destination d=optional.orElseThrow(()->new DestinationException("PackageService.ITINERARY_UNAVAILABLE"));
 		
 		DestinationDTO d1=new DestinationDTO();
 		DetailsDTO d2=new DetailsDTO();
@@ -101,7 +101,7 @@ public class PackageServiceImpl implements PackageService{
 	}
 	
 	@Override
-	public List<DestinationDTO> getPackages() throws WanderLustException {
+	public List<DestinationDTO> getPackages() throws DestinationException {
 		Iterable<Destination> destination = packageRepo.findAll();
 		List<DestinationDTO> dest=new ArrayList<>();
 		destination.forEach(d->{
@@ -134,7 +134,7 @@ public class PackageServiceImpl implements PackageService{
 		d1.setDetails(d1.getDetails());
 		dest.add(d1);
 		});
-		if(dest.isEmpty()) throw new WanderLustException("PackageService.PACKAGE_UNAVAILABLE");
+		if(dest.isEmpty()) throw new DestinationException("PackageService.PACKAGE_UNAVAILABLE");
 		return dest;
 	}
 	

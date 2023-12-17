@@ -17,7 +17,7 @@ import com.atul.dto.UserDTO;
 import com.atul.entity.Booking;
 import com.atul.entity.Destination;
 import com.atul.entity.User;
-import com.atul.exception.WanderLustException;
+import com.atul.exception.DestinationException;
 import com.atul.repository.BookingRepository;
 import com.atul.repository.PackageRepository;
 import com.atul.repository.UserRepository;
@@ -35,13 +35,13 @@ public class BookingServiceImpl implements BookingService {
 
 	@Override
 
-	public Integer addBooking(BookingDTO booking, Integer userId, String destinationId) throws WanderLustException {
+	public Integer addBooking(BookingDTO booking, Integer userId, String destinationId) throws DestinationException {
 
 		Optional<User> optional = userRepo.findById(userId);
-		User user = optional.orElseThrow(() -> new WanderLustException("BookingService.BOOKING_ERROR"));
+		User user = optional.orElseThrow(() -> new DestinationException("BookingService.BOOKING_ERROR"));
 
 		Optional<Destination> opt = packageRepo.findById(destinationId);
-		Destination destination = opt.orElseThrow(() -> new WanderLustException("BookingService.NO_BOOKING"));
+		Destination destination = opt.orElseThrow(() -> new DestinationException("BookingService.NO_BOOKING"));
 		Booking book = new Booking();
 		book.setTimeOfBooking(booking.getTimeOfBooking());
 		book.setCheckIn(booking.getCheckIn());
@@ -57,14 +57,14 @@ public class BookingServiceImpl implements BookingService {
 
 
 	@Override
-	public List<BookingDTO> getBooking(Integer userId) throws WanderLustException {
+	public List<BookingDTO> getBooking(Integer userId) throws DestinationException {
 		
 		
 		Optional<User> optional=userRepo.findById(userId);
-		User user=optional.orElseThrow(()-> new WanderLustException("BookingService.NO_BOOKING"));
+		User user=optional.orElseThrow(()-> new DestinationException("BookingService.NO_BOOKING"));
 		List<Booking> bookings=bookingRepo.findByUserEntity(user);
 		if(bookings.isEmpty()) {
-			throw new WanderLustException("BookingService.BOOKING_ERROR");
+			throw new DestinationException("BookingService.BOOKING_ERROR");
 		}
 		List<BookingDTO>bookingDTO=new ArrayList<>();
 		bookings.forEach(a->{
@@ -121,9 +121,9 @@ public class BookingServiceImpl implements BookingService {
 	}
 
 	@Override
-	public String deleteBooking(Integer bookingId) throws WanderLustException {
+	public String deleteBooking(Integer bookingId) throws DestinationException {
 		Optional<Booking> opt = bookingRepo.findById(bookingId);
-		Booking booking = opt.orElseThrow(() -> new WanderLustException("BookingService.NO_BOOKING"));
+		Booking booking = opt.orElseThrow(() -> new DestinationException("BookingService.NO_BOOKING"));
 		if (booking != null) {
 			booking.setUserEntity(null);
 			booking.setDestinationEntity(null);

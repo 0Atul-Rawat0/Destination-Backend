@@ -15,7 +15,7 @@ public class LoggingAspect {
 
 private static final Log LOGGER = LogFactory.getLog(LoggingAspect.class);
 	
-	@AfterThrowing(pointcut = "execution(* com.infy.service.*Impl.*(..))", throwing = "exception")	
+	@AfterThrowing(pointcut = "execution(* com.atul.service.*Impl.*(..))", throwing = "exception")	
 	public void logExceptionFromService(Exception exception) {
 		 LOGGER.error(exception.getMessage(), exception);
 	}

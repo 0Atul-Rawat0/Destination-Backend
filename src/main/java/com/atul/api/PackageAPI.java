@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.atul.dto.DestinationDTO;
-import com.atul.exception.WanderLustException;
+import com.atul.exception.DestinationException;
 import com.atul.service.PackageService;
 
 
@@ -27,7 +27,7 @@ public class PackageAPI {
 	
   
 	@GetMapping(value="/packages/{continent}")
-	public ResponseEntity<List<DestinationDTO>> getPackagesSearch(@PathVariable String continent) throws WanderLustException{
+	public ResponseEntity<List<DestinationDTO>> getPackagesSearch(@PathVariable String continent) throws DestinationException{
 		
 		List<DestinationDTO> list=packageService.getPackagesSearch(continent);
 		return new  ResponseEntity<List<DestinationDTO>>(list,HttpStatus.OK);
@@ -35,7 +35,7 @@ public class PackageAPI {
 	}
 
 	@GetMapping(value="/itinerary/{destinationId}")
-	public ResponseEntity<DestinationDTO> getItinerary(@PathVariable String destinationId) throws WanderLustException{	 
+	public ResponseEntity<DestinationDTO> getItinerary(@PathVariable String destinationId) throws DestinationException{	 
 		 DestinationDTO d=packageService.getItinerary(destinationId);
 		return new  ResponseEntity<>(d,HttpStatus.OK);
 		
@@ -44,7 +44,7 @@ public class PackageAPI {
 	}
 	
 	@GetMapping(value="/getPackages")
-	public ResponseEntity<List<DestinationDTO>> getPackages() throws WanderLustException{
+	public ResponseEntity<List<DestinationDTO>> getPackages() throws DestinationException{
 		List<DestinationDTO> list=packageService.getPackages();
 		return new  ResponseEntity<List<DestinationDTO>>(list,HttpStatus.OK);
 		

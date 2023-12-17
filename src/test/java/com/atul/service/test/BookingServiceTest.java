@@ -33,7 +33,7 @@ import com.atul.entity.Itinerary;
 
 import com.atul.dto.UserDTO;
 import com.atul.entity.User;
-import com.atul.exception.WanderLustException;
+import com.atul.exception.DestinationException;
 import com.atul.repository.BookingRepository;
 import com.atul.repository.PackageRepository;
 import com.atul.repository.UserRepository;
@@ -103,7 +103,7 @@ public class BookingServiceTest {
 		
 
 		Mockito.when(userRepository.findById(user.getUserId())).thenReturn(Optional.empty());
-		WanderLustException exception = Assertions.assertThrows(WanderLustException.class,
+		DestinationException exception = Assertions.assertThrows(DestinationException.class,
 				() -> bookServiceImpl.addBooking(booking,user.getUserId(),destination.getDestinationId()));
 		Assertions.assertEquals("BookingService.BOOKING_ERROR", exception.getMessage());
 
@@ -141,7 +141,7 @@ public class BookingServiceTest {
 		Mockito.when(userRepository.findById(user.getUserId())).thenReturn(Optional.of(user1));
 		Mockito.when( packageRepository.findById(anyString())).thenReturn(Optional.empty());
 
-		WanderLustException exception = Assertions.assertThrows(WanderLustException.class,
+		DestinationException exception = Assertions.assertThrows(DestinationException.class,
 				() -> bookServiceImpl.addBooking(booking,user.getUserId(),destination.getDestinationId()));
 		Assertions.assertEquals("BookingService.NO_BOOKING", exception.getMessage());
 
@@ -219,7 +219,7 @@ public class BookingServiceTest {
 		booking.setBookingId(10);
 		
 		Mockito.when(bookRepository.findById(anyInt())).thenReturn(Optional.empty());
-		WanderLustException exception = Assertions.assertThrows(WanderLustException.class,
+		DestinationException exception = Assertions.assertThrows(DestinationException.class,
 				() -> bookServiceImpl.deleteBooking(booking.getBookingId()));
 		Assertions.assertEquals("BookingService.NO_BOOKING", exception.getMessage());
 
@@ -250,7 +250,7 @@ public class BookingServiceTest {
 		UserDTO ad=new UserDTO();
 		ad.setUserId(500);
 		Mockito.when(userRepository.findById(500)).thenReturn (Optional.empty());
-		WanderLustException exception=Assertions.assertThrows(WanderLustException.class, ()-> bookServiceImpl.getBooking(a.getUserId()));
+		DestinationException exception=Assertions.assertThrows(DestinationException.class, ()-> bookServiceImpl.getBooking(a.getUserId()));
 		Assertions.assertEquals("BookingService.NO_BOOKING", exception.getMessage());
 	}
 
@@ -263,7 +263,7 @@ public class BookingServiceTest {
 		ad.setUserId(111);
 		Mockito.when(userRepository.findById(659)).thenReturn (Optional.of(a));
 		Mockito.when(bookRepository.findByUserEntity(a)).thenReturn(List.of());
-		WanderLustException exception=Assertions.assertThrows(WanderLustException.class, ()-> bookServiceImpl.getBooking(659));
+		DestinationException exception=Assertions.assertThrows(DestinationException.class, ()-> bookServiceImpl.getBooking(659));
 		Assertions.assertEquals("BookingService.BOOKING_ERROR", exception.getMessage());
 	}
 	
@@ -275,7 +275,7 @@ public class BookingServiceTest {
 	
 	
 @Test
-public void getBookingvalid() throws WanderLustException
+public void getBookingvalid() throws DestinationException
 {
 	Booking b4=new Booking();
 	b4.setBookingId(110);
