@@ -1,0 +1,74 @@
+1.To authenticate user:
+
+Post :
+http://localhost:4000/wanderlust/userAPI/userLogin
+
+Requestbody:
+   {
+        "contactNumber": 8884967823,
+        "password": "Scott@123"
+    }
+
+-----------------------------------------------------------------------
+
+2. To register user:
+
+Post:
+http://localhost:4000/wanderlust/userAPI/userRegister
+
+Requestbody:
+{
+    "userName": "Eva",
+    "emailId": "eva@yahoo.com",
+    "contactNumber": "8881112343",
+    "password": "Eva@123"
+}
+
+-----------------------------------------------------------------------
+
+3. To fetch all packages:
+
+Get:
+http://localhost:4000/wanderlust/packageAPI/getPackages
+
+-----------------------------------------------------------------------
+
+4: To search package:
+
+Get:
+http://localhost:4000/wanderlust/packageAPI/packages/Europe
+
+-----------------------------------------------------------------------
+
+5: To display package details / Itinerary:
+
+Get:
+http://localhost:4000/wanderlust/packageAPI/itinerary/D1001
+
+-----------------------------------------------------------------------
+
+6: To get the user booking records:
+
+Get:
+http://localhost:4000/wanderlust/bookingAPI/101
+
+-----------------------------------------------------------------------
+
+7: for new booking :
+
+Post:
+http://localhost:4000/wanderlust/bookingAPI/bookings/105/D1002
+
+Requestbody:
+{
+        "checkIn": "2023-11-12",
+        "checkOut": "2023-11-23",
+        "noOfPeople": 4
+    }
+
+------------------------------------------------------------------------
+
+8. For Delete Booking:
+
+Delete:
+http://localhost:4000/wanderlust/bookingAPI/bookings/1004
