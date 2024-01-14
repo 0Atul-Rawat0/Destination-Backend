@@ -8,11 +8,11 @@
 		<version>2.6.7</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.infy</groupId>
-	<artifactId>WanderLust</artifactId>
+	<groupId>com.atul</groupId>
+	<artifactId>Destination</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>WanderLust</name>
-	<description>Server Side project for Wanderlust</description>
+	<name>Destination</name>
+	<description>Server Side project for Destination</description>
 
 	<properties>
 		<java.version>17</java.version>
@@ -25,13 +25,13 @@
 		<sonar.projectKey>Dec22-SET1-NCS-JAVA-A-Group03</sonar.projectKey>
 		<sonar.projectName>Dec22-SET1-NCS-JAVA-A-Group03</sonar.projectName>
 		<sonar.projectVersion>1.0</sonar.projectVersion>
-		<sonar.coverage.exclusions>src/main/java/com/infy/exception/**,
-src/main/java/com/infy/entity/**,
-src/main/java/com/infy/dto/**,
-src/main/java/com/infy/utility/**,
-src/main/java/com/infy/api/**,
-src/main/java/com/infy/WanderlustServerSideApplication*,
-src/main/java/com/infy/repository/**</sonar.coverage.exclusions>
+		<sonar.coverage.exclusions>src/main/java/com/atul/exception/**,
+src/main/java/com/atul/entity/**,
+src/main/java/com/atul/dto/**,
+src/main/java/com/atul/utility/**,
+src/main/java/com/atul/api/**,
+src/main/java/com/atul/WanderlustServerSideApplication*,
+src/main/java/com/atul/repository/**</sonar.coverage.exclusions>
 		<sonar.sources>${project.basedir}\src\main\java</sonar.sources>
 		<sonar.tests>${project.basedir}\src\test\java</sonar.tests>
 		<sonar.java.binaries>${project.basedir}\target\classes</sonar.java.binaries>
@@ -114,7 +114,7 @@ src/main/java/com/infy/repository/**</sonar.coverage.exclusions>
 	</dependencies>
 
 	<build>
-		<finalName>WanderLust</finalName>
+		<finalName>Destination</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
@@ -160,14 +160,14 @@ src/main/java/com/infy/repository/**</sonar.coverage.exclusions>
             <version>0.8.8</version>
             <configuration>
 					<excludes>
-						<exclude>com/infy/api/**</exclude>
-						<exclude>com/infy/utility/**</exclude>
-						<exclude>com/infy/dto/**</exclude>
-						<exclude>com/infy/entity/**</exclude>
-						<exclude>com/infy/exception/**</exclude>
-						<exclude>com/infy/repository/**</exclude>
+						<exclude>com/atul/api/**</exclude>
+						<exclude>com/atul/utility/**</exclude>
+						<exclude>com/atul/dto/**</exclude>
+						<exclude>com/atul/entity/**</exclude>
+						<exclude>com/atul/exception/**</exclude>
+						<exclude>com/atul/repository/**</exclude>
 			
-						<exclude>com/infy/WanderlustServerSideApplication*</exclude>
+						<exclude>com/atul/DestinationServerSideApplication*</exclude>
 					</excludes>
 					<classFolders>
 						<classFolder>${basedir}/target/classes</classFolder>
